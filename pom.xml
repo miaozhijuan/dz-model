@@ -1,0 +1,92 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>hd</groupId>
+	<artifactId>dz-model</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 阿里数据库连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>1.1.9</version>
+			</dependency>
+
+			<!-- 整合MyBatis分页插件 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>1.2.5</version>
+			</dependency>
+
+			<!-- dubbo包 -->
+			<dependency>
+				<groupId>com.gitee.reger</groupId>
+				<artifactId>spring-boot-starter-dubbo</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+
+			<!-- zookeeper客户端包 -->
+			<dependency>
+				<groupId>org.apache.curator</groupId>
+				<artifactId>curator-recipes</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+
+			<!-- 阿里json包 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.47</version>
+			</dependency>
+
+			<!-- swagger代码包 -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>2.5.0</version>
+			</dependency>
+
+			<!-- swagger-ui包 -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>2.5.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>dz-model-common</module>
+		<module>dz-model-redis-api</module>
+		<module>dz-model-redis-service</module>
+		<module>dz-model-admin-api</module>
+		<module>dz-model-admin-service</module>
+		<module>dz-model-admin-web</module>
+		<module>dz-model-client-api</module>
+		<module>dz-model-client-service</module>
+		<module>dz-model-client-web</module>
+		<module>dz-model-goods-api</module>
+		<module>dz-model-goods-service</module>
+		<module>dz-model-goods-web</module>
+		<module>dz-model-order-api</module>
+		<module>dz-model-order-service</module>
+		<module>dz-model-order-web</module>
+	</modules>
+</project>

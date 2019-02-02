@@ -1,0 +1,44 @@
+#开发环境
+server:
+    port: 8081
+spring:
+    dubbo:
+        application:
+            name: dz-model-redis-service
+        base-package: hd.service.impl
+        protocol:
+            name: dubbo
+            serialization: hessian2
+        provider:
+            retries: 0
+        registry:
+            address: 127.0.0.1
+            port: 2181
+    redis:
+        database: 15
+        host: 127.0.0.1
+        password: 123456
+        pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1
+            min-idle: 0
+        port: 6379
+        timeout: 5000
+   
+#zookeeper连接配置
+#重试次数
+n: 10
+#每次重试间隔的时间
+sleepMsBetweenRetries: 5000
+#zookeeper地址
+connectString: 127.0.0.1:2181
+#session失效时间
+sessionTimeoutMs: 10000
+#zookeeper工作空间
+namespace: workspace
+
+#分布式锁总节点
+lockProject: hd_locks
+#商品库存锁节点
+goodsLock: goods_lock

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hd.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="hd.entity.Goods" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="withhold_amount" property="withholdAmount" jdbcType="INTEGER" />
+    <result column="online" property="online" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, name, price, amount, withhold_amount, online, status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from goods
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hd.entity.Goods" >
+    insert into goods (id, user_id, name, 
+      price, amount, withhold_amount, 
+      online, status, create_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{withholdAmount,jdbcType=INTEGER}, 
+      #{online,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hd.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="withholdAmount != null" >
+        withhold_amount,
+      </if>
+      <if test="online != null" >
+        online,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="withholdAmount != null" >
+        #{withholdAmount,jdbcType=INTEGER},
+      </if>
+      <if test="online != null" >
+        #{online,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hd.entity.Goods" >
+    update goods
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="withholdAmount != null" >
+        withhold_amount = #{withholdAmount,jdbcType=INTEGER},
+      </if>
+      <if test="online != null" >
+        online = #{online,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hd.entity.Goods" >
+    update goods
+    set user_id = #{userId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=INTEGER},
+      withhold_amount = #{withholdAmount,jdbcType=INTEGER},
+      online = #{online,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="list" resultMap="BaseResultMap" parameterType="hd.common.serach.SearchConditions" >
+  	select 
+   <include refid="Base_Column_List" />
+    from goods
+  	<include refid="generator_sql.generator_Example_Where_Clause" />
+  </select>
+  <update id="buckleWithholdAmount">
+		update goods set amount = (amount -#{amount}) , withhold_amount =  (withhold_amount + #{amount}) where id = #{goodsId} and (amount - #{amount} > 0)
+	</update>
+  <update id="buckleAmount">
+		update goods set withhold_amount =  (withhold_amount - #{amount}) where id = #{goodsId} and (withhold_amount - #{amount} > 0)
+  </update>
+</mapper>

@@ -1,0 +1,17 @@
+#开发环境
+server:
+    port: 8083
+    servlet:
+        context-path: /dz-model-admin-web
+spring:
+    dubbo:
+        application:
+            name: dz-model-admin-web
+        base-package: hd.service.impl
+        consumer:
+            check: true
+            retries: 2
+            timeout: 1000
+        registry:
+            address: 127.0.0.1
+            port: 2181

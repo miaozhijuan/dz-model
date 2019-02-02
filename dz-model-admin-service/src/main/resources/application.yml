@@ -1,0 +1,15 @@
+#mybatis配置
+mybatis:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+        map-underscore-to-camel-case: true
+    mapper-locations: classpath:maping/*.xml
+#分页插件配置
+pagehelper:
+    helperDialect: mysql
+    params: count=countSql
+    reasonable: false
+    supportMethodsArguments: false
+spring:
+    profiles:
+        active: dev

@@ -1,0 +1,37 @@
+#开发环境
+server:
+    port: 8082
+spring:
+    datasource:
+        cachePrepStmts: true
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        initialSize: 10
+        maxActive: 100
+        maxPoolPreparedStatementPerConnectionSize: 50
+        maxWait: 60000
+        minEvictableIdleTimeMillis: 300000
+        minIdle: 5
+        password: Hd@123456
+        poolPreparedStatements: true
+        removeAbandoned: true
+        testOnBorrow: false
+        testOnReturn: false
+        testWhileIdle: true
+        timeBetweenEvictionRunsMillis: 60000
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/model_admin?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: root
+        validationQuery: select 'x'
+    dubbo:
+        application:
+            name: dz-model-admin-service
+        base-package: hd.service.impl
+        protocol:
+            name: dubbo
+            serialization: hessian2
+        provider:
+            retries: 0
+        registry:
+            address: 127.0.0.1
+            port: 2181

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hd.mapper.SysUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="hd.entity.SysUserRoleKey" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="hd.entity.SysUserRoleKey" >
+    	delete from sys_user_role
+		<where>
+			<if test="roleId != null">
+				and role_id = #{roleId,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null">
+				and user_id =#{userId,jdbcType=VARCHAR}
+			</if>
+		</where>
+  </delete>
+  <insert id="insert" parameterType="hd.entity.SysUserRoleKey" >
+    insert into sys_user_role (role_id, user_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hd.entity.SysUserRoleKey" >
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertList" parameterType="java.util.ArrayList">
+		insert into sys_user_role (role_id,user_id) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.roleId,jdbcType=VARCHAR},#{item.userId,jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+</mapper>

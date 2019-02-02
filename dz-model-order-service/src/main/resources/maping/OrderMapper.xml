@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hd.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="hd.entity.Order" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+    <result column="discount_amount" property="discountAmount" jdbcType="INTEGER" />
+    <result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ip_address, user_id, seller_id, discount_amount, total_amount, status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `order`
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from `order`
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hd.entity.Order" >
+    insert into `order` (id, ip_address, user_id, 
+      seller_id, discount_amount, total_amount, 
+      status, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{sellerId,jdbcType=VARCHAR}, #{discountAmount,jdbcType=INTEGER}, #{totalAmount,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="hd.entity.Order" >
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sellerId != null" >
+        seller_id,
+      </if>
+      <if test="discountAmount != null" >
+        discount_amount,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountAmount != null" >
+        #{discountAmount,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hd.entity.Order" >
+    update `order`
+    <set >
+      <if test="ipAddress != null" >
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerId != null" >
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="discountAmount != null" >
+        discount_amount = #{discountAmount,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hd.entity.Order" >
+    update `order`
+    set ip_address = #{ipAddress,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      seller_id = #{sellerId,jdbcType=VARCHAR},
+      discount_amount = #{discountAmount,jdbcType=INTEGER},
+      total_amount = #{totalAmount,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="list" resultMap="BaseResultMap" parameterType="hd.common.serach.SearchConditions" >
+  	select 
+   <include refid="Base_Column_List" />
+    from `order`
+  	<include refid="generator_sql.generator_Example_Where_Clause" />
+  </select>
+</mapper>
